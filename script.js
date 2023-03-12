@@ -1,0 +1,125 @@
+console.log("js connected");
+const Form = document.querySelector("form");
+const GetAll = document.getElementById("getAll");
+const Detail = document.getElementById("detail-div");
+
+
+GetAll.addEventListener("click", async (event) => {
+  event.preventDefault();
+  Detail.innerHTML = "";
+  Detail.innerHTML;
+  try {
+    const sn = Form.sn.value;
+    // const res = await fetch(`http://api.alquran.cloud/v1/surah/${sn}`);
+    const res = await fetch(`http://api.alquran.cloud/v1/surah`);
+    const json = await res.json();
+    console.log(json);
+    if (json.code === 404) {
+      Detail.innerHTML += `
+        <div class="card p-3 mt-3" id="detail-section">
+        <div class="d-flex  justify-content-center w-100">
+        <p>${json.data}</p>
+        </div>
+        </div>
+        `;
+    } else {
+      json.data.forEach((item) => {
+        Detail.innerHTML += `
+        <div class="card p-3 mt-3" id="detail-section">
+        <h3>${item.englishName}</h3>
+        <hr />
+        <div class="d-flex  justify-content-center w-100">
+
+        <div class="d-flex  justify-content-center w-100">
+        <p class="fw-bold mx-2">Name: </h2>
+        <p>${item.name}</p>
+        </div>
+
+        <div class="d-flex  justify-content-center w-100">
+        <p class="fw-bold mx-2">Meaning: </h2>
+        <p>${item.englishNameTranslation}</p>
+        </div>
+
+        <div class="d-flex  justify-content-center w-100">
+        <p class="fw-bold mx-2">No of Ayat: </h2>
+        <p>${item.numberOfAyahs}</p>
+        </div>
+
+        <div class="d-flex  justify-content-center w-100">
+        <p class="fw-bold mx-2">Revelation: </h2>
+        <p>${item.revelationType}</p>
+        </div>
+  `;
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+// 
+
+Form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  Detail.innerHTML = "";
+  Detail.innerHTML;
+  try {
+    const sn = Form.sn.value;
+    const res = await fetch(`http://api.alquran.cloud/v1/surah/${sn}`);
+    // const res = await fetch(`http://api.alquran.cloud/v1/surah`);
+    const json = await res.json();
+    console.log(json);
+    if (json.code === 404) {
+      Detail.innerHTML += `
+        <div class="card p-3 mt-3" id="detail-section">
+        <div class="d-flex  justify-content-center w-100">
+        <p>${json.data}</p>
+        </div>
+        </div>
+        `;
+    } else {
+    
+       Detail.innerHTML = `
+        <div class="card p-3 mt-3 d-flex justify-content-between align-items-center" id="detail-section">
+        <h3 class="fw-bolder">${json.data.englishName}</h3> 
+          <button class="btn btn-dark " id="getTrans" onclick="getTranslation()"><strong>Aduio</strong> </button>   
+        <hr />
+        <div class="d-flex  justify-content-center w-100">
+
+        <div class="d-flex  justify-content-center w-100">
+        <p class="fw-bold mx-2">Name: </h2>
+        <p class="fw-bold" >${json.data.name}</p>
+        </div>
+
+        <div class="d-flex  justify-content-center w-100">
+        <p class="fw-bold mx-2">Meaning: </h2>
+        <p class="fw-bold">${json.data.englishNameTranslation}</p>
+        </div>
+
+        <div class="d-flex  justify-content-center w-100">
+        <p class="fw-bold mx-2">No of Ayat: </h2>
+        <p class="fw-bold">${json.data.numberOfAyahs}</p>
+        </div>
+
+        <div class="d-flex  justify-content-center w-100">
+        <p class="fw-bold mx-2">Revelation: </h2>
+        <p class="fw-bold">${json.data.revelationType}</p>
+        </div> 
+        
+  `;
+   
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+  async function  getTranslation() {
+  const sn = Form.sn.value;
+   const res = await fetch(`http://api.alquran.cloud/v1/surah/${sn}`);
+    // const res = await fetch(`http://api.alquran.cloud/v1/surah`);
+    const json = await res.json();
+  Detail.innerHTML = `<audio controls>
+               <source src="https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${sn}.mp3" type="audio/mpeg">
+               Your browser does not support the audio element.
+               </audio> `;
+}
