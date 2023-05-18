@@ -15,7 +15,7 @@ GetAll.addEventListener("click", async (event) => {
 
     const sn = Form.sn.value;
     // const res = await fetch(`http://api.alquran.cloud/v1/surah/${sn}`);
-    const res = await fetch(`http://api.alquran.cloud/v1/surah`);
+    const res = await fetch(`https://api.alquran.cloud/v1/surah`);
     const json = await res.json();
     console.log(json);
     if (json.code === 404) {
@@ -71,7 +71,7 @@ Form.addEventListener("submit", async (event) => {
   try {
     loading.style.display = "";
     const sn = Form.sn.value;
-    const res = await fetch(`http://api.alquran.cloud/v1/surah/${sn}`);
+    const res = await fetch(`https://api.alquran.cloud/v1/surah/${sn}`);
     // const res = await fetch(`http://api.alquran.cloud/v1/surah`);
     const json = await res.json();
     console.log(json);
@@ -125,7 +125,7 @@ Form.addEventListener("submit", async (event) => {
 
 async function getTranslation() {
   const sn = Form.sn.value;
-  const res = await fetch(`http://api.alquran.cloud/v1/surah/${sn}`);
+  const res = await fetch(`https://api.alquran.cloud/v1/surah/${sn}`);
   // const res = await fetch(`http://api.alquran.cloud/v1/surah`);
   const json = await res.json();
   Detail.innerHTML = `<audio controls>
