@@ -32,7 +32,7 @@ GetAll.addEventListener("click", async (event) => {
         <div class="card p-3 mt-3" id="detail-section">
         <h3>${item.englishName}</h3>
         <hr />
-        <div class="d-flex  justify-content-center w-100">
+        <div class="d-md-flex justify-content-center w-100">
 
         <div class="d-flex  justify-content-center w-100">
         <p class="fw-bold mx-2">Name: </h2>
@@ -91,7 +91,7 @@ Form.addEventListener("submit", async (event) => {
             <button class="btn btn-dark " id="getTrans" onclick="getTranslation()"><strong>Aduio</strong> </button>
           </div>   
           <hr />
-          <div class="d-flex  justify-content-center w-100">
+          <div class="d-md-flex  justify-content-center w-100">
             <div class="d-flex  justify-content-center w-100">
               <p class="fw-bold mx-2">Name: </h2>
               <p class="fw-bold" >${json.data.name}</p>
