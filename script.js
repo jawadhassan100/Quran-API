@@ -128,7 +128,7 @@ async function getTranslation() {
   const res = await fetch(`https://api.alquran.cloud/v1/surah/${sn}`);
   // const res = await fetch(`http://api.alquran.cloud/v1/surah`);
   const json = await res.json();
-  Detail.innerHTML = `<div style="display:flex; justify-content:center;"><audio controls>
+  Detail.innerHTML = `<div  style="display: flex; justify-content: center;"><audio controls>
                <source src="https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${sn}.mp3" type="audio/mpeg">
                Your browser does not support the audio element.
                </audio></div> `;
